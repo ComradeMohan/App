@@ -97,6 +97,7 @@ export default function GetStarted() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
   backgroundImage: {
     flex: 1,
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: '#F7F9F7',
     borderRadius: 12,
     padding: 15,
     marginBottom: 10,
