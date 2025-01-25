@@ -9,7 +9,10 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
+  Dimensions,
 } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 export default function SignUp() {
   const router = useRouter();
@@ -17,75 +20,33 @@ export default function SignUp() {
   return (
     <ImageBackground
       source={{
-        uri: 'https://creatie.ai/ai/api/search-image?query=A stunning 3D digital illustration showing interconnected geometric elements with blue gradient effects, modern tech concept art with floating particles and glowing lines, minimalist and elegant design, clean background',
+        uri: 'https://images.wallpapersden.com/image/download/starry-landscape-4k-cool-blue-moon_bW5tbG6UmZqaraWkpJRobWllrWdma2U.jpg',
       }}
       style={styles.backgroundImage}
+      imageStyle={styles.overlay}
     >
       <ScrollView contentContainerStyle={styles.container}>
+        {/* Heading for Sign Up */}
+        <Text style={styles.heading}>Sign Up</Text>
+        
         <View style={styles.header}>
           <Text style={styles.title}>Create your Saveetha Hub Account</Text>
           <Text style={styles.subtitle}>Fill in your details to get started</Text>
         </View>
 
         <View style={styles.form}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Full Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your full name"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Register Number</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your register number"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Department</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your department"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your email"
-              keyboardType="email-address"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Username</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Choose a username"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Create a password"
-              secureTextEntry
-            />
-          </View>
-
-          <View style={styles.checkboxContainer}>
-            <TextInput
-              style={styles.checkbox}
-              value=""
-              editable={false}
-            />
-            <Text style={styles.checkboxText}>Remember me</Text>
-          </View>
+          {/* Input fields */}
+          {['Full Name', 'Register Number', 'Department', 'Email', 'Username', 'Password'].map((label, index) => (
+            <View key={index} style={styles.inputContainer}>
+              <Text style={styles.label}>{label}</Text>
+              <TextInput
+                style={styles.input}
+                placeholder={`Enter your ${label.toLowerCase()}`}
+                secureTextEntry={label === 'Password'}
+                keyboardType={label === 'Email' ? 'email-address' : 'default'}
+              />
+            </View>
+          ))}
 
           <TouchableOpacity style={styles.submitButton}>
             <Text style={styles.submitButtonText}>Create Account</Text>
@@ -121,127 +82,109 @@ export default function SignUp() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   backgroundImage: {
     flex: 1,
-    resizeMode: 'cover',
-  },
-  container: {
-    flexGrow: 1,
-    padding: 20,
+    width,
     justifyContent: 'center',
   },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+  heading: {
+    fontSize: 36, // Adjust font size for the heading
+    color: 'white',
+    fontWeight: 'bold',
+    marginBottom: 20, // Space below the heading
+    textAlign: 'center', // Center the heading text
+  },
   header: {
-    marginBottom: 20,
     alignItems: 'center',
+    marginBottom: 30,
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
+    color: 'white',
     fontWeight: 'bold',
-    color: '#000',
-    textAlign: 'center',
+    marginBottom: 10,
   },
   subtitle: {
-    fontSize: 14,
-    color: '#D1D5DB',
+    fontSize: 16,
+    color: 'white',
     textAlign: 'center',
-    marginTop: 10,
+    marginBottom: 20,
   },
   form: {
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    padding: 20,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 5,
+    width: '80%',
   },
   inputContainer: {
-    marginBottom: 15,
-  },
-  label: {
-    fontSize: 14,
-    color: '#374151',
-    marginBottom: 5,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    marginBottom: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
   },
   input: {
-    backgroundColor: '#F9FAFB',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    borderRadius: 8,
-    padding: 10,
-    fontSize: 14,
-    color: '#111827',
+    padding: 15,
+    fontSize: 16,
   },
-  checkboxContainer: {
-    flexDirection: 'row',
+  label: {
+    color: '#333', 
+    marginBottom: 5,
+    fontWeight: 'bold',
+  },
+  submitButton: {
+    backgroundColor: '#f9a826',
+    padding: 15,
+    borderRadius: 10,
     alignItems: 'center',
     marginBottom: 20,
   },
-  checkbox: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#E5E7EB',
-    borderRadius: 4,
-    marginRight: 8,
-  },
-  checkboxText: {
-    fontSize: 14,
-    color: '#374151',
-  },
-  submitButton: {
-    backgroundColor: '#6366F1',
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
   submitButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
+    color: 'white',
     fontWeight: 'bold',
   },
   divider: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 20,
+    marginBottom: 20,
   },
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: '#ddd',
+    backgroundColor: 'white',
   },
   dividerText: {
-    marginHorizontal: 8,
-    fontSize: 14,
-    color: '#aaa',
+    color: 'white',
+    marginHorizontal: 10,
   },
   googleButton: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: 'white',
-    paddingVertical: 12,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
     marginBottom: 20,
-  },
-  googleIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
-  },
-  googleButtonText: {
-    fontSize: 16,
-    color: '#444',
-    fontWeight: '500',
-  },
-  signInButton: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  signInText: {
-    color: '#6366F1',
-    fontWeight: 'bold',
-    fontSize: 14,
-  },
+   },
+   googleIcon:{
+     width :20 ,
+     height :20 ,
+     marginRight :10 ,
+   },
+   googleButtonText:{
+     color:'black' ,
+     fontWeight:'bold' ,
+   },
+   signInButton:{
+     padding :15 ,
+   },
+   signInText:{
+     color:'white' ,
+     textAlign:'center' ,
+   }
 });
